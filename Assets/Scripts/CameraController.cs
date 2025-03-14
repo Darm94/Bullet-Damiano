@@ -36,14 +36,15 @@ public class CameraController : MonoBehaviour
 
 
         float xDirection = useMouseLook ? Input.GetAxis("Horizontal")  : 0 ;
-        float zDirection = _v * movementSpeed ;
+        float zDirection = _v  ;
         
+         //added movementSpeed here cause it was canceled by the normalization
          Vector3 direction = new Vector3(xDirection, 0, zDirection).normalized *  (_turbo * Time.deltaTime * movementSpeed);
          transform.Translate(direction);
 
          if (useMouseLook) // use mouse horizontal rotation  
          {
-             transform.Rotate(new Vector3(0, mouseSpeed * Time.deltaTime * mouse , 0));
+             transform.Rotate(new Vector3(0, mouseSpeed * Time.deltaTime * _h , 0));
          }
          else //use A and D 
          {

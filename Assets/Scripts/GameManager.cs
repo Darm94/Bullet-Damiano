@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int numberOfTurrets = 5; // CHANGED TO PRIVATE
     private GameObject[] _turrets;
 
-    [SerializeField] [Range(0.1f, 50f)] private float minDistanceX = 10;
-    [SerializeField] [Range(0.1f, 50f)] private float minDistanceZ = 10;
+    [SerializeField] [Range(0.1f, 50f)] private float minDistanceX = 5;
+    [SerializeField] [Range(0.1f, 50f)] private float minDistanceZ = 5;
 
-    [SerializeField] [Range(1f, 100f)] private float deltaX = 30;
-    [SerializeField] [Range(1f, 100f)] private float deltaZ = 30;
+    [SerializeField] [Range(1f, 100f)] private float deltaX = 15;
+    [SerializeField] [Range(1f, 100f)] private float deltaZ = 15;
 
     [SerializeField] [Range(0.05f, 5f)] private float minFireRate = 0.5f; // "*0.5"
     [SerializeField] [Range(0.05f, 5f)] private float maxFireRate = 2f;
@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
     #endregion
 
     [SerializeField] GameObject gameOver; // Game Over Text (TMP)
-    [SerializeField] GameObject youWin; // Unchanged
+    [SerializeField] GameObject youWin; // W
+                                        // in text
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
