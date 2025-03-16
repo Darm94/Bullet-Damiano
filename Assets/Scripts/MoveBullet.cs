@@ -7,7 +7,7 @@ public class MoveBullet : MonoBehaviour
     public void Configure(float speed)
     {
         _speed = speed;
-        Destroy(gameObject, 4);
+        Destroy(gameObject, 14);
         
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created

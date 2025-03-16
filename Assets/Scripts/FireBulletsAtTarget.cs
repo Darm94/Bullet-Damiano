@@ -8,9 +8,9 @@ public class FireBulletsAtTarget : MonoBehaviour
     [SerializeField] GameObject head;
     [SerializeField] Transform[] firePositions;
     [SerializeField] [Range(1f, 10f)] private float minBulletSpeed;
-    [SerializeField] [Range(1f, 10f)] private float maxBulletSpeed;
-    [SerializeField] [Range(1f, 180f)] private float rotateSpeed = 45; 
-    [SerializeField] [Range(-1f, 1f)] private float fireAngle = -0.5f;
+    [SerializeField] [Range(5f, 20f)] private float maxBulletSpeed;
+    [SerializeField] [Range(1f, 180f)] private float rotateSpeed = 60; 
+    [SerializeField] [Range(-1f, 1f)] private float fireAngle = 0.8f;
 
     private Transform _target;
 
@@ -52,20 +52,23 @@ public class FireBulletsAtTarget : MonoBehaviour
 
         activationMark.SetActive(true);
 
-        Vector3 directionStart = firePositions[0].position.normalized;
-        Vector3 directionEnd = (firePositions[0].transform.position - _target.transform.position).normalized;
+        //Vector3 directionStart = firePositions[0].position.normalized;
+        Vector3 directionStart = head.transform.forward;
+        Vector3 directionEnd = ( _target.transform.position - firePositions[0].transform.position ).normalized;
 
         float angle = Vector3.Angle(directionStart, directionEnd);
 
         float dot = Vector3.Dot(directionStart, directionEnd);
 
-        if (debugDetectionAngle) Debug.LogWarning($"[gameObject.name]: angle: {angle} dot: {dot}", gameObject);
+        if (debugDetectionAngle) Debug.LogWarning($"{gameObject.name}: angle: {angle} dot: {dot}", gameObject);
 
         var q = Quaternion.LookRotation(_target.position - head.transform.position);
         head.transform.rotation = Quaternion.RotateTowards(head.transform.rotation, q, rotateSpeed * Time.deltaTime);
-
-        if (dot > fireAngle) return;
         
+        //inverted cause i prefered to visualize the fire angle basing on the fact that dot = 1 mean that the tower is alligned on the target
+        //so fireAngle become a index of proximity to the alligment on target if 1 we firePosition perfect alligned with target 
+        //WARNING: -1 means will never shoot, and the firePosizion allignement could not be equal to tower alligment (better set fireAngle under 9.5)
+        if (dot <= fireAngle) return; 
         nextFire += Time.deltaTime;
 
         if (nextFire >= _fireRate)
