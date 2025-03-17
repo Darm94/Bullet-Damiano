@@ -57,7 +57,7 @@ MonoBehaviour:
   maxBulletSpeed: 20
   rotateSpeed: 180
   fireAngle: 0.8
-  debugDetectionAngle: 1
+  debugDetectionAngle: 0
   debugArea: 1
 --- !u!136 &3575794693268903
 CapsuleCollider:

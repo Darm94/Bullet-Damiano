@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class GameManager : MonoBehaviour
 {
     #region Turrets
@@ -117,6 +116,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Game OVER: Play time: {Time.time}");
 
         gameOver.SetActive(true);
+        gameOver.GetComponent<AudioSource>().Play();
     }
 
     public void DidDestroyWall()
@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
             Debug.Log($"Game OVER: YOU WIN! Play time: {Time.time}");
 
             youWin.SetActive(true);
+            youWin.GetComponent<AudioSource>().Play();
         }
     }
 
