@@ -8,7 +8,8 @@ public class DestroyOnMultiHit : MonoBehaviour
     [SerializeField] private bool randomHitCount = true;
     private int currentHitCount;
     private int startHitCount;//if i want to reset the wall
-    
+
+    private bool stopCollisions = false;
     //To change color or transparency
     private Material _material;
     private float _destroyStepsPercent = 1;
@@ -38,7 +39,7 @@ public class DestroyOnMultiHit : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         //2:03:33
-        if (!other.gameObject.GetComponent<MoveBullet>()) return;
+        if (!other.gameObject.GetComponent<MoveBullet>() || stopCollisions) return;
         
         currentHitCount -= 1;
         _material.color -= new Color(0f, 0f, 0f, _destroyStepsPercent);
@@ -51,18 +52,22 @@ public class DestroyOnMultiHit : MonoBehaviour
 
             if (_audioSource.clip)
             {
+                Debug.Log("Playing audio...");
                 _audioSource.Play();
+                Debug.Log($"Audio clip length: {_audioSource.clip.length}");
+                GetComponent<MeshRenderer>().enabled = false;
                 Invoke(nameof(DestroyMe), _audioSource.clip.length); // wait the full duration of the audio before destroying 
                 
             }
             else
             {
+                Debug.Log("No audio clip found");
+                
                 Destroy(gameObject);
             }
-            
-            //to avoid next calls cause On Collision work even if the component is disabled
-            Destroy(this);
-            
+
+            stopCollisions = true;
+
         }
         
     }
@@ -70,6 +75,7 @@ public class DestroyOnMultiHit : MonoBehaviour
     private void DestroyMe()
     {
         _gameManager = null;
+        Debug.Log("DESTROYING WALL"); 
         Destroy(gameObject);
     }
 }

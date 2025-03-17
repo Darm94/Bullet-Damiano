@@ -15,6 +15,12 @@ public class PlayerLifeOnCollision : MonoBehaviour
     // Variabile per tenere traccia se il gioco è finito
     private bool isGameOver = false;
     
+    [Header("Health Recovery Settings")]
+    private float timeSinceLastDamage = 0f;// Variabile per tracciare il tempo trascorso senza danni
+    [SerializeField] private float recoveryDelay = 6f;// Impostiamo il tempo di recupero dei punti vita
+    [SerializeField] private float recoveryRate = 1f;
+    private float timeAccumulated = 0f; // Variabile per accumulare il tempo
+    
     private AudioSource _audioSource;
     int actualLifePoints;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,6 +37,33 @@ public class PlayerLifeOnCollision : MonoBehaviour
         // Aggiungiamo la logica per aumentare l'alpha in base ai punti vita
         float targetAlpha = Mathf.Clamp(1 - (actualLifePoints / (float)lifePoints), 0, 0.8f);
         redOverlay.color = Color.Lerp(redOverlay.color, new Color(1, 0, 0, targetAlpha), Time.deltaTime * 5f);
+        // Se non c'è stato danno per 'recoveryDelay' secondi, inizia a recuperare punti vita
+        if (timeSinceLastDamage >= recoveryDelay && actualLifePoints < lifePoints)
+        {
+            RecoverHealth();
+        }
+        else
+        {
+            timeSinceLastDamage += Time.deltaTime; // Incrementa il tempo senza danni
+        }
+        
+    }
+    private void RecoverHealth()
+    {
+        // Aggiungi il tempo trascorso
+        timeAccumulated += Time.deltaTime;
+
+        // Se il tempo accumulato supera il tempo necessario per recuperare un punto vita
+        if (timeAccumulated >= recoveryRate)
+        {
+            // Incrementa i punti vita
+            actualLifePoints = Mathf.Min(actualLifePoints + 1, lifePoints);
+
+            // Resetta il tempo accumulato
+            timeAccumulated -= recoveryRate;
+
+            Debug.Log($"Recupero salute: {actualLifePoints}");
+        }
     }
     private void OnCollisionEnter(Collision other)
     {
@@ -42,6 +75,9 @@ public class PlayerLifeOnCollision : MonoBehaviour
         {
             _audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Length)]);
         }
+        // Reset del timer per il recupero
+        timeSinceLastDamage = 0f;
+        
         //Game Over
         if (actualLifePoints <= 0)
         {
