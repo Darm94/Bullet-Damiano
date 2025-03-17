@@ -53,7 +53,7 @@ MonoBehaviour:
   head: {fileID: 938477278162375241}
   firePositions:
   - {fileID: 7952746323218671657}
-  minBulletSpeed: 1.17
+  minBulletSpeed: 5.3
   maxBulletSpeed: 20
   rotateSpeed: 180
   fireAngle: 0.8
@@ -95,7 +95,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 6d77ef3c7e1dba04ebb19e1856fbb7af, type: 3}
   m_Resource: {fileID: 8300000, guid: 6d77ef3c7e1dba04ebb19e1856fbb7af, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.51
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -204,7 +204,7 @@ Transform:
   m_GameObject: {fileID: 8141598618102113279}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.647, z: 2.125}
+  m_LocalPosition: {x: 0, y: 0.647, z: 2.295}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -84,7 +84,7 @@ MonoBehaviour:
   head: {fileID: 1328198011981565008}
   firePositions:
   - {fileID: 2214041310181005628}
-  minBulletSpeed: 4.62
+  minBulletSpeed: 5.35
   maxBulletSpeed: 9.18
   rotateSpeed: 65
   fireAngle: 0.8
@@ -126,7 +126,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 6d77ef3c7e1dba04ebb19e1856fbb7af, type: 3}
   m_Resource: {fileID: 8300000, guid: 6d77ef3c7e1dba04ebb19e1856fbb7af, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.515
   m_Pitch: 1
   Loop: 0
   Mute: 0

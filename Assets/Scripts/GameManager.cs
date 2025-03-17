@@ -6,17 +6,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int numberOfTurrets = 5; // CHANGED TO PRIVATE
     private GameObject[] _turrets;
 
-    [SerializeField] [Range(0.1f, 50f)] private float minDistanceX = 5;
-    [SerializeField] [Range(0.1f, 50f)] private float minDistanceZ = 5;
+    [SerializeField] [Range(0.1f, 50f)] private float minDistanceX = 10;
+    [SerializeField] [Range(0.1f, 50f)] private float minDistanceZ = 10;
 
-    [SerializeField] [Range(1f, 100f)] private float deltaX = 15;
-    [SerializeField] [Range(1f, 100f)] private float deltaZ = 15;
+    [SerializeField] [Range(1f, 100f)] private float deltaX = 30;
+    [SerializeField] [Range(1f, 100f)] private float deltaZ = 30;
 
     [SerializeField] [Range(0.05f, 5f)] private float minFireRate = 0.5f; // "*0.5"
     [SerializeField] [Range(0.05f, 5f)] private float maxFireRate = 2f;
 
-    [SerializeField] [Range(1f, 50f)] private float minFireDistance = 10f;
-    [SerializeField] [Range(1f, 100f)] private float maxFireDistance = 20f;
+    [SerializeField] [Range(1f, 50f)] private float minFireDistance = 25f;
+    [SerializeField] [Range(1f, 100f)] private float maxFireDistance = 30f;
     #endregion
 
     #region Walls
@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject[] wallsPrefab; // Serializzabile
 
-    [SerializeField] [Range(0.1f, 50f)] private float minDistanceWallX = 1;
-    [SerializeField] [Range(0.1f, 50f)] private float minDistanceWallZ = 5;
+    [SerializeField] [Range(0.1f, 50f)] private float minDistanceWallX = 5;
+    [SerializeField] [Range(0.1f, 50f)] private float minDistanceWallZ = 10;
 
     [SerializeField] [Range(1f, 50f)] private float deltaWallX = 1;
     [SerializeField] [Range(1f, 100f)] private float deltaWallZ = 1;
@@ -57,9 +57,9 @@ public class GameManager : MonoBehaviour
             do
             {
                 _turrets[i].transform.position = new Vector3(
-                    minDistanceX * Random.Range(-1f, 1f) + deltaX, 
+                    minDistanceX + Random.Range(-1f, 1f) * deltaX, 
                     0, 
-                    minDistanceZ * Random.Range(-1f, 1f) + deltaZ);
+                    minDistanceZ + Random.Range(-1f, 1f) * deltaZ);
 
                 _turrets[i].transform.Rotate(Vector3.up, Random.Range(0f, 360f), Space.World);
 
@@ -87,10 +87,10 @@ public class GameManager : MonoBehaviour
             // Place wall around turret
             GameObject wall = Instantiate(wallsPrefab[Random.Range(0, wallsPrefab.Length)]);
 
-            wall.transform.position = new Vector3(
-                minDistanceWallX * Random.Range(-1f, 1f) + deltaWallX, 
+            wall.transform.position = _turrets[i].transform.position + new Vector3(
+                minDistanceWallX + Random.Range(-1f, 1f) * deltaWallX, 
                 wall.transform.localScale.y * 0.5f,  // Move up (half height -> pivot is half)
-                minDistanceWallZ * Random.Range(-1f, 1f) + deltaWallZ
+                minDistanceWallZ + Random.Range(-1f, 1f) * deltaWallZ
             );
 
             // Rotate around turret randomly
