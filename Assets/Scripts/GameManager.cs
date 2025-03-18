@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     #region Walls
     private int _wallsAvailable = 0;
 
-    [SerializeField] private GameObject[] wallsPrefab; // Serializzabile
+    [SerializeField] private GameObject[] wallsPrefab; 
 
     [SerializeField] [Range(0.1f, 50f)] private float minDistanceWallX = 5;
     [SerializeField] [Range(0.1f, 50f)] private float minDistanceWallZ = 10;

@@ -4,20 +4,20 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] [Range(0.1f,5)] private float movementSpeed = 4.5f;
-    [SerializeField] [Range(1, 100)] private float rSpeed = 80;  //gradi al secondo
-    [SerializeField] [Range(1, 150)] private float mouseSpeed = 100f; //muoversi ruotandosi o solo con la testiera o col mouse  
+    [SerializeField] [Range(1, 100)] private float rSpeed = 80;  //grades for second
+    [SerializeField] [Range(1, 150)] private float mouseSpeed = 100f;  
     [SerializeField] [Range(1, 10)] private float turboSpeed = 1.5f;
         
-    [SerializeField] private bool useMouseLook = true;  //così ruotiamo col mouse
+    [SerializeField] private bool useMouseLook = true;  // moves rotating with keyboard or mouse
     [SerializeField] private CursorLockMode useLockState = CursorLockMode.Locked;
     
     [Header("Footsteps Settings")]
-    [SerializeField] private AudioClip[] footstepSounds; // Array con suoni di passi diversi
-    [SerializeField] private float stepInterval = 0.5f; // Tempo tra un passo e l'altro
-    private float nextStepTime = 0f; // Timer per il prossimo passo
+    [SerializeField] private AudioClip[] footstepSounds; // Differents steps sounds
+    [SerializeField] private float stepInterval = 0.5f; // Time between one step and the after one
+    private float nextStepTime = 0f; // Timer for next step
     private AudioSource _audioSource;
     
-    //variabili per update
+    //variables for update
     private float _turbo;
     private float _h;
     private float _v;
@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
          Vector3 direction = new Vector3(xDirection, 0, zDirection).normalized *  (_turbo * Time.deltaTime * movementSpeed);
          transform.Translate(direction);
          
-         // Se ci muoviamo, riproduciamo i suoni di passi
+         // if it moves, play steps sound
          if (direction.magnitude > 0.01f && Time.time >= nextStepTime)
          {
              @Debug.Log("passo");

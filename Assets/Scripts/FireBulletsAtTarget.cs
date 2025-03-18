@@ -35,8 +35,8 @@ public class FireBulletsAtTarget : MonoBehaviour
         activationMark.SetActive(false);
     }
 
-// Update is called once per frame
-// Frent function
+    // Update is called once per frame
+    // Frent function
 
     void Update()
     {
@@ -85,7 +85,7 @@ public class FireBulletsAtTarget : MonoBehaviour
         }
     }
 
-// Event Function
+    // Event Function
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying || !debugArea) return;

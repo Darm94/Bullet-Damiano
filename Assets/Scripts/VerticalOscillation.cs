@@ -4,9 +4,9 @@ public class VerticalOscillation : MonoBehaviour
 {
     [SerializeField] private float verticalOscillationSpeed = 1.1f;
     [SerializeField] private float rotateSpeed = 30;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    float minY = 0.1f;   // Posizione più bassa
-    float maxY = 1.0f;   // Posizione più alta
+    
+    float minY = 0.1f;   // Lowest position
+    float maxY = 1.0f;   // Uppest position
     float startYPosition; //to add it on oscillation fuction 
     void Start()
     {
